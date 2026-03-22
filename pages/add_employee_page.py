@@ -1,4 +1,5 @@
-# pylint: disable=too-many-instance-attributes, too-few-public-methodsfrom playwright.sync_api import Page
+# pylint: disable=too-many-instance-attributes, too-few-public-methods
+from playwright.sync_api import Page
 class AddEmployeePage:
     """Page object for Add Employee page."""
     def __init__(self, page: Page):
