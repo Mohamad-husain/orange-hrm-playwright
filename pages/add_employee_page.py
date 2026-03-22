@@ -20,18 +20,17 @@ class AddEmployeePage:
 
         self.save_button = page.get_by_role("button", name="Save")
 
-    def add_employee(self, first, middle, last):
+    def add_employee(self, employee_data, with_login=False):
         self.add_employee_link.click()
-        self.first_name.fill(first)
-        self.middle_name.fill(middle)
-        self.last_name.fill(last)
 
-    def add_login_details(self, username, password):
-        self.login_checkbox.click()
+        self.first_name.fill(employee_data["first"])
+        self.middle_name.fill(employee_data["middle"])
+        self.last_name.fill(employee_data["last"])
 
-        self.username.fill(username)
-        self.password.fill(password)
-        self.confirm_password.fill(password)
+        if with_login:
+            self.login_checkbox.click()
+            self.username.fill(employee_data["username"])
+            self.password.fill(employee_data["password"])
+            self.confirm_password.fill(employee_data["password"])
 
-    def save(self):
         self.save_button.click()

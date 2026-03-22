@@ -1,12 +1,12 @@
 from playwright.sync_api import Page
+from data.constants import BASE_URL
 
 
 class LoginPage:
     """Page object for login page."""
-    URL = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
 
     def navigate(self):
-        self.page.goto(self.URL)
+        self.page.goto(BASE_URL)
 
     def __init__(self, page: Page):
         self.page = page
