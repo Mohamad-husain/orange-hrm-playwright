@@ -1,7 +1,7 @@
 EMPLOYEE_1 = {
     "first": "Mohammad",
     "middle": "Saher",
-    "last": "Husain"
+    "last": "Hussain"
 }
 
 EMPLOYEE_2 = {

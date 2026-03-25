@@ -4,7 +4,6 @@ from data.constants import BASE_URL
 
 class LoginPage:
     """Page object for login page."""
-
     def navigate(self):
         self.page.goto(BASE_URL)
 
