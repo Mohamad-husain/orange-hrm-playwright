@@ -9,5 +9,4 @@ def admin_login(page):
     login = LoginPage(page)
     login.navigate()
     login.login(ADMIN_USERNAME, ADMIN_PASSWORD)
-    page.wait_for_load_state("networkidle")
     return page
