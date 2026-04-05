@@ -17,3 +17,4 @@ def test_add_employee_with_login(admin_login):
     employee = AddEmployeePage(page)
     dashboard.go_to_pim()
     employee.add_employee(EMPLOYEE_2, with_login=True)
+
