@@ -1,11 +1,15 @@
 from playwright.sync_api import Page, expect
 
+
 class EmployeeSearchPage:
     """Page object for Employee List search."""
+
     def __init__(self, page: Page):
         self.page = page
         self.pim_menu = page.get_by_role("link", name="PIM")
-        self.employee_name_input = page.get_by_role("textbox", name="Type for hints...").first
+        self.employee_name_input = (
+            page.get_by_role("textbox", name="Type for hints...").first
+        )
         self.search_button = page.get_by_role("button", name="Search")
         self.employee_id_input = page.get_by_role("textbox").nth(2)
         self.employee_name_option = page.get_by_role("option")
