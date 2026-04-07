@@ -1,28 +1,12 @@
 import pytest
 
-from pages.dashboard_page import DashboardPage
-from pages.add_employee_page import AddEmployeePage
 from pages.employee_search_page import EmployeeSearchPage
 from data.employee_data import EMPLOYEE_1
 
 
 @pytest.fixture
-def created_employee(admin_login):
-    page = admin_login
-
-    dashboard = DashboardPage(page)
-    employee = AddEmployeePage(page)
-    full_name = " ".join(
-        (EMPLOYEE_1["first"], EMPLOYEE_1["middle"], EMPLOYEE_1["last"])
-    )
-
-    dashboard.go_to_pim()
-    employee.add_employee(EMPLOYEE_1)
-    return {
-        "page": page,
-        "employee_id": employee.get_employee_id(),
-        "full_name": full_name,
-    }
+def created_employee(employee_factory):
+    return employee_factory(EMPLOYEE_1)
 
 
 @pytest.mark.parametrize(

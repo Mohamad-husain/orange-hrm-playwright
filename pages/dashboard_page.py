@@ -6,7 +6,12 @@ class DashboardPage:
     """Page object for dashboard page."""
     def __init__(self, page: Page):
         self.page = page
-        self.pim_menu = page.get_by_role("link", name="PIM")
+        self.pim_menu = page.get_by_role("link", name="PIM", exact=True)
+        self.recruitment_menu = page.get_by_role("link", name="Recruitment", exact=True)
 
     def go_to_pim(self):
         self.pim_menu.click()
+
+    def go_to_recruitment(self):
+        self.recruitment_menu.click()
+        self.page.wait_for_url("**/recruitment/viewCandidates")
