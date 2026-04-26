@@ -2,16 +2,17 @@ import pytest
 from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
 from pages.add_employee_page import AddEmployeePage
+from pages.candidates_page import CandidatesPage
 from pages.employee_search_page import EmployeeSearchPage
 from pages.vacancies_page import VacanciesPage
 from data.constants import ADMIN_USERNAME, ADMIN_PASSWORD
 
 
 @pytest.fixture
-def admin_login(page):
+def admin_login(page, base_url):
     """Return a logged-in page using pytest-playwright's built-in page fixture."""
     login = LoginPage(page)
-    login.navigate()
+    login.navigate(base_url)
     login.login(ADMIN_USERNAME, ADMIN_PASSWORD)
     return page
 
@@ -71,3 +72,31 @@ def vacancy_factory(admin_login):
         dashboard.go_to_recruitment()
         vacancies.open_vacancies()
         vacancies.delete_vacancies_by_name(vacancy_name)
+
+
+@pytest.fixture
+def candidate_factory(admin_login):
+    page = admin_login
+    dashboard = DashboardPage(page)
+    candidates = CandidatesPage(page)
+    created_candidates = []
+
+    def _create(candidate_data):
+        dashboard.go_to_recruitment()
+        candidates.open_candidates()
+        candidates.delete_candidates_by_name(candidate_data.full_name)
+        dashboard.go_to_recruitment()
+        candidates.open_candidates()
+        candidates.add_candidate(candidate_data)
+        created_candidates.append(candidate_data)
+        return {
+            "page": page,
+            "candidate": candidate_data,
+        }
+
+    yield _create
+
+    for candidate_data in reversed(created_candidates):
+        dashboard.go_to_recruitment()
+        candidates.open_candidates()
+        candidates.delete_candidates_by_name(candidate_data.full_name)

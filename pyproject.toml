@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "faker>=40.15.0",
     "playwright>=1.58.0",
     "pylint>=4.0.5",
     "pylint-pytest>=1.1.8",
@@ -15,3 +16,4 @@ disable = ["missing-module-docstring", "missing-function-docstring"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+base_url = "https://opensource-demo.orangehrmlive.com"

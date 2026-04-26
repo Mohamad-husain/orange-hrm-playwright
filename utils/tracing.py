@@ -34,12 +34,13 @@ def playwright_trace(page_fixture_name: str = "page"):
                 sources=True,
             )
             try:
-                return test_func(*args, **kwargs)
+                result = test_func(*args, **kwargs)
             except Exception:
                 page.context.tracing.stop(path=str(trace_path))
                 raise
-            else:
-                page.context.tracing.stop()
+
+            page.context.tracing.stop()
+            return result
 
         return wrapper
 

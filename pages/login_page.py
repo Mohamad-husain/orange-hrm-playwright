@@ -1,5 +1,5 @@
 from playwright.sync_api import Page, expect
-from data.constants import BASE_URL
+from data.constants import BASE_URL, LOGIN_PATH
 
 
 class LoginPage:
@@ -11,8 +11,9 @@ class LoginPage:
         self.login_button = page.get_by_role("button", name="Login")
         self.dashboard_heading = page.get_by_role("heading", name="Dashboard")
 
-    def navigate(self):
-        self.page.goto(BASE_URL)
+    def navigate(self, base_url: str | None = None):
+        app_base_url = base_url or BASE_URL
+        self.page.goto(f"{app_base_url.rstrip('/')}{LOGIN_PATH}")
 
     def login(self, username: str, password: str):
         self.username_input.fill(username)
